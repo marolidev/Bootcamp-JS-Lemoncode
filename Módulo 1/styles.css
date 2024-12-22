@@ -5,32 +5,68 @@
     --secondary: #ffffff;
 }
 
-* {box-sizing: border-box;
-margin: 20;
-padding: 10;
-}
 
 body{font-family: "Montserrat", serif;
-  font-size: 14px}
-
-h1{font-family: "Montserrat", serif;
-  font-size: 32px;
-    font-optical-sizing: auto;
-    font-weight: 700;
-    font-style: normal;
-  }
+  font-size: 14px;
+font-style: normal;}
 
 .container {
   display: grid;
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(3, 1fr);
+  width: 1280px;
 }
 
 .producto{
-  margin-left: 32px;
+
+  margin-left: 16px;
   margin-bottom: 16px;
-} 
+  align-items: center;
+}
+ 
+.producto img{
+  width: 80%;
+  border-radius: 10px;
+  height:auto;
+}
+
 .informacion{
-  width: 100px;
-  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  width: 50%;
+  margin-top: 8px;
+  padding: 10px;
+
+}
+
+footer {
+  display: flex;
+  width: 1280px;
+  background-color: var(--primary);
+  color: var(--secondary);
+  padding: 20px;
+  flex-shrink: 0;
+  gap: 20px;
+}
+
+.elemento-footer {
+  display: flex;
+  flex-direction: column; /* Organiza el logo y el texto en columnas */
+  justify-content: center;
+  align-items: center;
+  
+  width: 50px;
+  height: 50px;
+  background-color: var(--secondary);
+  border-radius: 50%; /* Crea un contenedor circular */
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+/* Logo con background blanco */
+.elemento-footer img {
+  max-width: 50%; 
+  max-height: 50%;
 }
