@@ -8,34 +8,34 @@
 
 body{font-family: "Montserrat", serif;
   font-size: 14px;
-font-style: normal;}
+font-style: normal;
+}
 
 .container {
   display: grid;
-  grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(3, 1fr);
-  width: 1280px;
+  justify-items: center;
+  column-width: auto;
+  max-width: 1280px;
+  width: 100%;
 }
 
 .producto{
-
-  margin-left: 16px;
   margin-bottom: 16px;
-  align-items: center;
+  margin-left: 8px;
 }
  
 .producto img{
-  width: 80%;
+  width: auto;
   border-radius: 10px;
-  height:auto;
+  height: auto;
+  align-items: center;
 }
 
 .informacion{
   display: flex;
   justify-content: space-between;
-  text-align: center;
   align-items: center;
-  width: 50%;
   margin-top: 8px;
   padding: 10px;
 
@@ -43,30 +43,60 @@ font-style: normal;}
 
 footer {
   display: flex;
-  width: 1280px;
+  flex-wrap: wrap;
   background-color: var(--primary);
+  justify-content: space-around;
+  align-items: center;
+  max-width: 1280px;
   color: var(--secondary);
   padding: 20px;
-  flex-shrink: 0;
-  gap: 20px;
+  text-align: center;
+}
+
+.footer-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.footer-item p {
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 14px; /* Ajusta el tamaño del texto */
+  color: var(--secondary);
 }
 
 .elemento-footer {
   display: flex;
-  flex-direction: column; /* Organiza el logo y el texto en columnas */
+  border-radius: 50%;
   justify-content: center;
   align-items: center;
-  
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   background-color: var(--secondary);
-  border-radius: 50%; /* Crea un contenedor circular */
-  color: var(--primary);
-  flex-shrink: 0;
 }
 
-/* Logo con background blanco */
+
 .elemento-footer img {
-  max-width: 50%; 
-  max-height: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 5px;
 }
+
+@media(max-width: 920px){
+  .container{
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .footer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .informacion{
+    width: 80%;
+    justify-content: space-between;
+  }
+  }
+
