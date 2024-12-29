@@ -9,6 +9,36 @@
 body{font-family: "Montserrat", serif;
   font-size: 14px;
 font-style: normal;
+position: relative;
+padding: 20px;
+top: 30px;
+color: var(--primary);}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  width: 70%;
+  top: 0px;
+  font-size: 16px;
+  border-bottom: solid 1px black;
+  border-spacing: 2rem;
+  color: var(--primary);
+  background-color: var(--secondary);
+}
+
+.nav {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  gap: 2em;
+}
+
+.nav p:hover{
+  background-color: rgb(167, 167, 167);
 }
 
 .container {
@@ -17,7 +47,7 @@ font-style: normal;
   justify-items: center;
   column-width: auto;
   max-width: 1280px;
-  width: 100%;
+  width: 70%;
 }
 
 .producto{
@@ -30,6 +60,11 @@ font-style: normal;
   border-radius: 10px;
   height: auto;
   align-items: center;
+}
+
+.producto:hover{
+  background-color: whitesmoke;
+  border-radius: 10px;
 }
 
 .informacion{
@@ -55,6 +90,7 @@ footer {
 
 .footer-item {
   display: flex;
+  font-size: 16px;
   justify-content: center;
   align-items: center;
   margin: 10px;
@@ -63,8 +99,12 @@ footer {
 .footer-item p {
   margin-top: 10px;
   margin-left: 10px;
-  font-size: 14px; /* Ajusta el tamaño del texto */
+  font-size: 14px; 
   color: var(--secondary);
+}
+
+.footer-item p:hover {
+  text-decoration: underline;
 }
 
 .elemento-footer {
@@ -85,18 +125,41 @@ footer {
 }
 
 @media(max-width: 920px){
+  .header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    border-bottom: solid 1px black;
+    border-spacing: 10px;
+  }
+
+.nav{display: none;
+}
+  .logo1{width: 40px;
+  height: 20px;
+}
+
+.logo1:hover{
+  background-color: whitesmoke;
+}
+
+.logo2{display:none}
+
   .container{
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  .footer{
+  .footer-item {
+    width: 100%;
+    border-bottom: solid 1px white;
+    border-spacing: 2rem;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+    flex-direction: column;}
+
   .informacion{
     width: 80%;
     justify-content: space-between;
   }
   }
-
