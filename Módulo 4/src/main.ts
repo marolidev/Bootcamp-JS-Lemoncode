@@ -1,63 +1,21 @@
-import "./style.css";
+//import "./style.css";
 
+function sumar(){
+    const sumando1 = (document.getElementById("sumando1") as HTMLInputElement).value;
+    const sumando2 = (document.getElementById("sumando2") as HTMLInputElement).value;
+    
+    //Sumar los dos números
+    const resultado = parseInt(sumando1) + parseInt(sumando2);
+    //Mostrar el resultado
+    const resultadoElement = document.getElementById("resultado");
 
-interface Grupo {
-    nombre: string;
-    año: number;
-    activo: boolean;
-    genero: string;
+    if (resultadoElement !== null && resultadoElement !== undefined){
+    resultadoElement.innerHTML = resultado.toString();
+    }
 }
 
+const botonSumar = document.getElementById("sumar");
 
-const beatles: Grupo = {
-    nombre: "The Beatles",
-    año: 1960,
-    activo: true,
-    genero: "🎵 Pop Rock"
+if (botonSumar !== null && botonSumar !==undefined){
+  botonSumar.addEventListener("click", sumar);
 }
-
-const queen: Grupo = {
-    nombre: "Queen",
-    año: 1970,
-    activo: false,
-    genero: "🎸 Rock"
-}
-
-const ACDC: Grupo = {
-    nombre: "AC DC",
-    año: 1973,
-    activo: true,
-    genero: "🤘 Hard Rock"
-}
-
-const beethoven: Grupo = {
-    nombre: "Ludwig van Beethoven",
-    año: 1770,
-    activo: false,
-    genero: "🎼 Clásica"
-}
-
-const rolling: Grupo = {
-    nombre: "The Rolling Stones",
-    año: 1962,
-    activo: true,
-    genero: "🎸 Rock"
-}
-
-const color = "background-color: green; font-size: 18px; font-weight: bold"
-
-
-console.log("%c" + beatles.nombre, color);
-console.log(beatles)
-
-console.log("%c" + queen.nombre, color);
-console.log(queen)
-
-console.log("%c" + ACDC.nombre, color);
-console.log(ACDC)
-
-console.log("%c" + beethoven.nombre, color);
-console.log(beethoven)
-
-console.log("%c" + rolling.nombre, color);
-console.log(rolling)
