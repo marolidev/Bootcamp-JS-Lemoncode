@@ -1,21 +1,65 @@
-//import "./style.css";
+import "./style.css";
 
-function sumar(){
-    const sumando1 = (document.getElementById("sumando1") as HTMLInputElement).value;
-    const sumando2 = (document.getElementById("sumando2") as HTMLInputElement).value;
-    
-    //Sumar los dos números
-    const resultado = parseInt(sumando1) + parseInt(sumando2);
-    //Mostrar el resultado
-    const resultadoElement = document.getElementById("resultado");
+ //Formatear el turno para que sea un número de 2 digitos
+function formatTurno(num:number){
+  return num.toString().padStart(2, "0")
+};
 
-    if (resultadoElement !== null && resultadoElement !== undefined){
-    resultadoElement.innerHTML = resultado.toString();
+function turno (){
+//Elementos: botón siguiente, botón anterior, botón reset, display
+ const siguiente = document.getElementById("next") as HTMLButtonElement; 
+ const anterior = document.getElementById("prev") as HTMLButtonElement;
+ const reset = document.getElementById("reset") as HTMLButtonElement;
+ const display = document.querySelector(".numero-turno") as HTMLHeadingElement;
+ const cambiar = document.getElementById("cambiar") as HTMLButtonElement;
+ const ingresar = document.getElementById("input-turno") as HTMLInputElement;
+
+let turno: number = 1;
+
+const actualizarDisplay = (): void => {
+    if (display !== null && display !== undefined)  {
+        display.textContent = formatTurno(turno);
     }
+};
+// Función para cambiar el turno
+function siguienteTurno(){
+  turno = turno + 1;
+  return actualizarDisplay();
+};
+
+function anteriorTurno(){
+  if (turno > 0) {
+      turno = turno - 1;
+      return actualizarDisplay();
+  }
+};
+
+function resetTurno(){
+  turno = 0;
+  return actualizarDisplay();
+};
+
+function cambiarTurnoManual(){
+  if (ingresar !== null && ingresar !== undefined){
+    const nuevoTurno = parseInt(ingresar.value, 10)
+    if(!isNaN(nuevoTurno) && nuevoTurno >=1){
+      turno = nuevoTurno;
+      actualizarDisplay();
+    }else{
+      alert("Ingrese un número mayor o igual que 1")}
+  }
+  ingresar.value = "";
 }
 
-const botonSumar = document.getElementById("sumar");
+// Agregar eventos a los botones si existen
+siguiente?.addEventListener("click", siguienteTurno);
+anterior?.addEventListener("click", anteriorTurno);
+reset?.addEventListener("click", resetTurno);
+cambiar?.addEventListener("click", cambiarTurnoManual);
 
-if (botonSumar !== null && botonSumar !==undefined){
-  botonSumar.addEventListener("click", sumar);
+// Mostrar el turno inicial
+actualizarDisplay();
 }
+
+// Llamar a la función para que se ejecute al cargar el script
+turno();
