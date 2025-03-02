@@ -7,12 +7,12 @@ function formatTurno(num:number){
 
 function turno (){
 //Elementos: botón siguiente, botón anterior, botón reset, display
- const siguiente = document.getElementById("next") as HTMLButtonElement; 
- const anterior = document.getElementById("prev") as HTMLButtonElement;
- const reset = document.getElementById("reset") as HTMLButtonElement;
- const display = document.querySelector(".numero-turno") as HTMLHeadingElement;
- const cambiar = document.getElementById("cambiar") as HTMLButtonElement;
- const ingresar = document.getElementById("input-turno") as HTMLInputElement;
+ const siguiente = document.getElementById("next"); 
+ const anterior = document.getElementById("prev");
+ const reset = document.getElementById("reset");
+ const display = document.querySelector(".numero-turno");
+ const cambiar = document.getElementById("cambiar");
+ const ingresar = document.getElementById("input-turno");
 
 let turno: number = 1;
 
@@ -22,6 +22,8 @@ const actualizarDisplay = (): void => {
     }
 };
 // Función para cambiar el turno
+
+
 function siguienteTurno(){
   turno = turno + 1;
   return actualizarDisplay();
@@ -40,7 +42,7 @@ function resetTurno(){
 };
 
 function cambiarTurnoManual(){
-  if (ingresar !== null && ingresar !== undefined){
+  if (ingresar !== null && ingresar !== undefined && ingresar instanceof HTMLInputElement){
     const nuevoTurno = parseInt(ingresar.value, 10)
     if(!isNaN(nuevoTurno) && nuevoTurno >=1){
       turno = nuevoTurno;
@@ -48,14 +50,21 @@ function cambiarTurnoManual(){
     }else{
       alert("Ingrese un número mayor o igual que 1")}
   }
-  ingresar.value = "";
 }
 
 // Agregar eventos a los botones si existen
-siguiente?.addEventListener("click", siguienteTurno);
-anterior?.addEventListener("click", anteriorTurno);
-reset?.addEventListener("click", resetTurno);
-cambiar?.addEventListener("click", cambiarTurnoManual);
+if (siguiente !== null && siguiente !== undefined && siguiente instanceof HTMLButtonElement){
+siguiente.addEventListener("click", siguienteTurno)};
+
+if (anterior !== null && anterior !== undefined && anterior instanceof HTMLButtonElement){
+anterior.addEventListener("click", anteriorTurno)};
+
+if (reset !== null && reset !== undefined && reset instanceof HTMLButtonElement){
+reset.addEventListener("click", resetTurno)};
+
+if (cambiar !== null && cambiar!== undefined && cambiar instanceof HTMLButtonElement){
+cambiar.addEventListener("click", cambiarTurnoManual);
+}
 
 // Mostrar el turno inicial
 actualizarDisplay();
