@@ -21,7 +21,7 @@ const actualizarDisplay = (): void => {
         display.textContent = formatTurno(turno);
     }
 };
-// Función para cambiar el turno
+// Funciones para cambiar el turno: siguiente, anterior y reset
 function siguienteTurno(){
   turno = turno + 1;
   actualizarDisplay();
@@ -39,6 +39,8 @@ function resetTurno(){
   actualizarDisplay();
 };
 
+//Función para cambiar el turno con un input mmanualmente
+
 function cambiarTurnoManual(){
   if (ingresar !== null && ingresar !== undefined && ingresar instanceof HTMLInputElement){
     const nuevoTurno = parseInt(ingresar.value, 10)
@@ -49,7 +51,6 @@ function cambiarTurnoManual(){
       alert("Ingrese un número mayor o igual que 1")}
   }
 }
-
 
 // Agregar eventos a los botones si existen dentro de la función
 
@@ -70,5 +71,5 @@ cambiar.addEventListener("click", cambiarTurnoManual);
 // Mostrar el turno inicial
 actualizarDisplay();
 
-// Llamar a la función para que se ejecute al cargar el script
+// Llamar a la función para que se ejecute al tener cargado el HTML para que no de fallo
 document.addEventListener('DOMContentLoaded', cargarAplicacion)
