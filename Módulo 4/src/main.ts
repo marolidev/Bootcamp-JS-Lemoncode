@@ -5,7 +5,7 @@ function formatTurno(num:number){
   return num.toString().padStart(2, "0")
 };
 
-function turno (){
+
 //Elementos: botón siguiente, botón anterior, botón reset, display
  const siguiente = document.getElementById("next"); 
  const anterior = document.getElementById("prev");
@@ -17,28 +17,26 @@ function turno (){
 let turno: number = 1;
 
 const actualizarDisplay = (): void => {
-    if (display !== null && display !== undefined)  {
+    if (display !== null && display !== undefined && display instanceof HTMLHeadingElement)  {
         display.textContent = formatTurno(turno);
     }
 };
 // Función para cambiar el turno
-
-
 function siguienteTurno(){
   turno = turno + 1;
-  return actualizarDisplay();
+  actualizarDisplay();
 };
 
 function anteriorTurno(){
   if (turno > 0) {
       turno = turno - 1;
-      return actualizarDisplay();
+      actualizarDisplay();
   }
 };
 
 function resetTurno(){
   turno = 0;
-  return actualizarDisplay();
+  actualizarDisplay();
 };
 
 function cambiarTurnoManual(){
@@ -52,7 +50,10 @@ function cambiarTurnoManual(){
   }
 }
 
-// Agregar eventos a los botones si existen
+
+// Agregar eventos a los botones si existen dentro de la función
+
+const cargarAplicacion = () => {
 if (siguiente !== null && siguiente !== undefined && siguiente instanceof HTMLButtonElement){
 siguiente.addEventListener("click", siguienteTurno)};
 
@@ -65,10 +66,9 @@ reset.addEventListener("click", resetTurno)};
 if (cambiar !== null && cambiar!== undefined && cambiar instanceof HTMLButtonElement){
 cambiar.addEventListener("click", cambiarTurnoManual);
 }
-
+}
 // Mostrar el turno inicial
 actualizarDisplay();
-}
 
 // Llamar a la función para que se ejecute al cargar el script
-turno();
+document.addEventListener('DOMContentLoaded', cargarAplicacion)
