@@ -67,9 +67,9 @@ reset.addEventListener("click", resetTurno)};
 if (cambiar !== null && cambiar!== undefined && cambiar instanceof HTMLButtonElement){
 cambiar.addEventListener("click", cambiarTurnoManual);
 }
-}
+actualizarDisplay();}
 // Mostrar el turno inicial
-actualizarDisplay();
+
 
 // Llamar a la función para que se ejecute al tener cargado el HTML para que no de fallo
 document.addEventListener('DOMContentLoaded', cargarAplicacion)
