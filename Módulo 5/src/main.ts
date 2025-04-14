@@ -6,133 +6,181 @@ let puntuacion: number = 0;
 let mensaje = document.getElementById("mensaje") as HTMLParagraphElement
 
 const muestraPuntuacion = () => {
-  const elementoPuntuacion = document.getElementById("puntuacion")
-  if(elementoPuntuacion != null && elementoPuntuacion != undefined)
-  {elementoPuntuacion.innerHTML = `${puntuacion}`}else{console.error("muestraPuntuacion: No se ha encontrado el elemento con id puntuacion")}
-  return elementoPuntuacion
+    const elementoPuntuacion = document.getElementById("puntuacion") as HTMLDivElement
+    if (elementoPuntuacion !== undefined && elementoPuntuacion !== null) 
+    {elementoPuntuacion.innerHTML = `${puntuacion}` } 
+    else { 
+        console.error("muestraPuntuacion: No se ha encontrado el elemento con id puntuacion") 
+    }
+    
+    return elementoPuntuacion
 }
+//Obtener puntuación a partir del número aleatorio y suma de puntuaciones
+const obtenerPuntosCarta = (carta: number) => {
+    if (carta > 7) {
+        return 0.5;
+    }
+    return carta;
+}
+
+// Sumar puntuación
+const sumaPuntuacion = (punto: number) => {
+    return puntuacion + punto;
+}
+
+//Actualizar
+const actualizarPuntuacion = (puntosNuevos: number) => {
+    puntuacion = puntosNuevos;
+}
+
+//Mensaje mostrado
+const mostrarMensaje = (mensaje: string) => {
+    const elementoMensaje = document.getElementById("mensaje");
+
+    if (elementoMensaje && elementoMensaje instanceof HTMLParagraphElement) {
+        elementoMensaje.textContent = mensaje;
+    }
+}
+
 
 document.addEventListener("DOMContentLoaded", muestraPuntuacion)
 
 //Pedir carta
-const dameCarta = ():number => Math.floor(Math.random()*10 +1)
+const obtenerNumeroAleatorio = (): number => Math.floor(Math.random() * 10 + 1);
+
+const obtenerNumeroCarta = (numero: number) => {
+    if (numero > 7) {
+        return numero + 2;
+    }
+
+    return numero;
+}
 
 //Mostrar carta
-const cartaImagen = document.getElementById("cartaImagen") as HTMLImageElement;
+const obtenerUrlCarta = (carta: number) => {
+    switch (carta) {
+        case 1:
+            return "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/1_as-copas.jpg";
+        case 2:
+            return "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/2_dos-copas.jpg";
+        case 3:
+            return "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/3_tres-copas.jpg";
+        case 4:
+            return "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/4_cuatro-copas.jpg";
+        case 5:
+            return "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/5_cinco-copas.jpg";
+        case 6:
+            return "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/6_seis-copas.jpg";
+        case 7:
+            return "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/7_siete-copas.jpg";
+        case 10:
+            return "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/10_sota-copas.jpg";
+        case 11:
+            return "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/11_caballo-copas.jpg";
+        case 12:
+            return "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/12_rey-copas.jpg";
+        default:
+            return "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg";
+    }
+}
 
-const mostrarCarta = (carta: number): void => {
-  
-  let imagenSrc = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg";
-  switch (carta) {
-      case 1:
-          imagenSrc = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/1_as-copas.jpg";
-          break;
-      case 2:
-          imagenSrc = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/2_dos-copas.jpg";
-          break;
-      case 3:
-          imagenSrc = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/3_tres-copas.jpg";
-          break;
-      case 4:
-          imagenSrc = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/4_cuatro-copas.jpg";
-          break;
-      case 5:
-          imagenSrc = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/5_cinco-copas.jpg";
-          break;
-      case 6:
-          imagenSrc = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/6_seis-copas.jpg";
-          break;
-      case 7:
-          imagenSrc = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/7_siete-copas.jpg";
-          break;
-      case 10:
-          imagenSrc = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/10_sota-copas.jpg";
-          break;
-      case 11:
-          imagenSrc = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/11_caballo-copas.jpg";
-          break;
-      case 12:
-          imagenSrc = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/12_rey-copas.jpg";
-          break;
-  }
-  cartaImagen.src = imagenSrc;
+const mostrarCarta = (urlCarta: string): void => {
+    const cartaImagen = document.getElementById("cartaImagen");
+
+    if (cartaImagen && cartaImagen instanceof HTMLImageElement) {
+        cartaImagen.src = urlCarta;
+    }
 };
 
+//botones
 const botonPedirCarta = document.getElementById("dameCarta") as HTMLButtonElement
 
-// Sumar puntuación
-const sumaPuntuacion = (carta:number) => {
-    if (carta === 10 || carta === 11 || carta === 12){
-        puntuacion += 0.5
-    }else{puntuacion += carta}
-    return carta
+const botonNueva = document.getElementById("nueva") as HTMLButtonElement;
+
+const botonQueHabriaPasado = document.getElementById("alternativa") as HTMLButtonElement;
+
+const botonPlantarse = document.getElementById("plantarse") as HTMLButtonElement
+
+const deshabilitarBotonPedirCarta = (estaDeshabilitado: boolean) => {
+
+    if (botonPedirCarta && botonPedirCarta instanceof HTMLButtonElement) {
+        botonPedirCarta.disabled = estaDeshabilitado;
+    }
+}
+const deshabilitarBotonPlantarse = (estaDeshabilitado: boolean) => {
+
+    if (botonPlantarse && botonPlantarse instanceof HTMLButtonElement) {
+        botonPlantarse.disabled = estaDeshabilitado;
+    }
 }
 
 //Game over
 function gameOver() {
     if (puntuacion > 7.5 && mensaje) {
-        mensaje.innerText = "Game Over";
-        mensaje.style.display = "block";
-        if(botonPedirCarta && botonPedirCarta instanceof HTMLButtonElement){botonPedirCarta.disabled = true}
-        if (botonPlantarse && botonPlantarse instanceof HTMLButtonElement) botonPlantarse.disabled = true;
+        mostrarMensaje('Game Over');
+        deshabilitarBotonPedirCarta(true);
+        deshabilitarBotonPlantarse(true);
+    }
+
+    else if (puntuacion === 7.5) {
+        mostrarMensaje('Has ganado');
+        deshabilitarBotonPedirCarta(true);
     }
 }
 
-if (botonPedirCarta && botonPedirCarta instanceof HTMLButtonElement){
+if (botonPedirCarta && botonPedirCarta instanceof HTMLButtonElement) {
     botonPedirCarta.addEventListener("click", () => {
-      let cartaRand:number = dameCarta()
-      if(cartaRand > 7) {cartaRand +=2}
-        sumaPuntuacion(cartaRand)
-        mostrarCarta(cartaRand);
+        let numeroAleatorio: number = obtenerNumeroAleatorio();
+        const carta = obtenerNumeroCarta(numeroAleatorio);
+        const urlCarta = obtenerUrlCarta(carta);
+        mostrarCarta(urlCarta);
+
+        const puntosCarta = obtenerPuntosCarta(carta);
+        const puntosSumados = sumaPuntuacion(puntosCarta);
+        actualizarPuntuacion(puntosSumados);
         muestraPuntuacion();
         gameOver();
     });
-}else{console.error("No se encontró el botón dameCarta")
+} else {
+    console.error("No se encontró el botón dameCarta")
 }
 
-//Me planto
-const botonNueva = document.getElementById("nueva") as HTMLButtonElement;
-const botonQueHabriaPasado = document.getElementById("alternativa") as HTMLButtonElement;
-const botonPlantarse = document.getElementById("plantarse") as HTMLButtonElement
 
-if (botonPlantarse && botonPlantarse instanceof HTMLButtonElement){
+
+if (botonPlantarse && botonPlantarse instanceof HTMLButtonElement) {
     botonPlantarse.addEventListener("click", () => {
-        let textoMensaje = "";
-            if (puntuacion < 4) {
-                textoMensaje = "Has sido muy conservador"}
-            if (puntuacion === 5){
-                textoMensaje = "Te ha entrado el canguelo eh?"}
-            if (puntuacion === 6)
-                {textoMensaje = "Casi casi..."}
-            if (puntuacion === 7)
-                {textoMensaje = "Casi casi..."}
-            if (puntuacion === 7.5)
-                {textoMensaje = "¡Lo has clavado!¡Enhorabuena!"}
-        mensaje.innerText = textoMensaje;
+        if (puntuacion < 4) {
+            mostrarMensaje("Has sido muy conservador")
+        }
+        if (puntuacion === 5 || puntuacion === 5.5) {
+            mostrarMensaje("Te ha entrado el canguelo eh?")
+        }
+        if (puntuacion === 6 || puntuacion === 6.5 || puntuacion === 7) { mostrarMensaje("Casi casi...") }
+        if (puntuacion === 7.5) { mostrarMensaje("¡Lo has clavado!¡Enhorabuena!") }
         mensaje.style.display = "block";
 
-        if (botonPedirCarta && botonPedirCarta instanceof HTMLButtonElement) botonPedirCarta.disabled = true;
-        if (botonPlantarse && botonPlantarse instanceof HTMLButtonElement) botonPlantarse.disabled = true;
+        deshabilitarBotonPedirCarta(true)
+        deshabilitarBotonPlantarse(true)
         botonQueHabriaPasado.style.display = "block";
     })
-    
+
 }
 // Nueva partida
 
-if (botonNueva && botonNueva instanceof HTMLButtonElement){
+if (botonNueva && botonNueva instanceof HTMLButtonElement) {
     botonNueva.addEventListener("click", () => {
         puntuacion = 0;
         muestraPuntuacion();
         mensaje.style.display = "none";
-        botonPedirCarta.disabled = false;
-        botonPlantarse.disabled = false;
+        deshabilitarBotonPedirCarta(false)
+        deshabilitarBotonPlantarse(false)
         botonQueHabriaPasado.style.display = "none"
     })
 }
 
-if (botonQueHabriaPasado && botonQueHabriaPasado instanceof HTMLButtonElement){
+if (botonQueHabriaPasado && botonQueHabriaPasado instanceof HTMLButtonElement) {
     botonQueHabriaPasado.addEventListener("click", () => {
-        let cartaRand = dameCarta()
+        let cartaRand = obtenerNumeroAleatorio()
         mensaje.innerText = `Si hubieras seguido, habría salido un ${cartaRand}`;
         mensaje.style.display = "block"
     })
