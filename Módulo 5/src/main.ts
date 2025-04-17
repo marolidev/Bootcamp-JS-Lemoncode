@@ -3,10 +3,10 @@ import "./style.css";
 //Mostrar puntuación
 
 let puntuacion: number = 0;
-let mensaje = document.getElementById("mensaje") as HTMLParagraphElement
+let mensaje = document.getElementById("mensaje") instanceof HTMLParagraphElement
 
 const muestraPuntuacion = () => {
-    const elementoPuntuacion = document.getElementById("puntuacion") as HTMLDivElement
+    const elementoPuntuacion = document.getElementById("puntuacion")
     if (elementoPuntuacion !== undefined && elementoPuntuacion !== null) 
     {elementoPuntuacion.innerHTML = `${puntuacion}` } 
     else { 
@@ -42,8 +42,6 @@ const mostrarMensaje = (mensaje: string) => {
     }
 }
 
-
-document.addEventListener("DOMContentLoaded", muestraPuntuacion)
 
 //Pedir carta
 const obtenerNumeroAleatorio = (): number => Math.floor(Math.random() * 10 + 1);
@@ -93,13 +91,13 @@ const mostrarCarta = (urlCarta: string): void => {
 };
 
 //botones
-const botonPedirCarta = document.getElementById("dameCarta") as HTMLButtonElement
+const botonPedirCarta = document.getElementById("dameCarta")
 
-const botonNueva = document.getElementById("nueva") as HTMLButtonElement;
+const botonNueva = document.getElementById("nueva");
 
-const botonQueHabriaPasado = document.getElementById("alternativa") as HTMLButtonElement;
+const botonQueHabriaPasado = document.getElementById("alternativa");
 
-const botonPlantarse = document.getElementById("plantarse") as HTMLButtonElement
+const botonPlantarse = document.getElementById("plantarse")
 
 const deshabilitarBotonPedirCarta = (estaDeshabilitado: boolean) => {
 
@@ -147,7 +145,7 @@ if (botonPedirCarta && botonPedirCarta instanceof HTMLButtonElement) {
 
 
 
-if (botonPlantarse && botonPlantarse instanceof HTMLButtonElement) {
+if (botonPlantarse && botonQueHabriaPasado && botonPlantarse instanceof HTMLButtonElement && botonQueHabriaPasado instanceof HTMLButtonElement) {
     botonPlantarse.addEventListener("click", () => {
         if (puntuacion < 4) {
             mostrarMensaje("Has sido muy conservador")
@@ -157,7 +155,6 @@ if (botonPlantarse && botonPlantarse instanceof HTMLButtonElement) {
         }
         if (puntuacion === 6 || puntuacion === 6.5 || puntuacion === 7) { mostrarMensaje("Casi casi...") }
         if (puntuacion === 7.5) { mostrarMensaje("¡Lo has clavado!¡Enhorabuena!") }
-        mensaje.style.display = "block";
 
         deshabilitarBotonPedirCarta(true)
         deshabilitarBotonPlantarse(true)
@@ -167,13 +164,14 @@ if (botonPlantarse && botonPlantarse instanceof HTMLButtonElement) {
 }
 // Nueva partida
 
-if (botonNueva && botonNueva instanceof HTMLButtonElement) {
+if (botonNueva && botonQueHabriaPasado && botonNueva instanceof HTMLButtonElement && botonQueHabriaPasado instanceof HTMLButtonElement) {
     botonNueva.addEventListener("click", () => {
         puntuacion = 0;
         muestraPuntuacion();
-        mensaje.style.display = "none";
         deshabilitarBotonPedirCarta(false)
         deshabilitarBotonPlantarse(false)
+        mostrarCarta("https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg")
+        mostrarMensaje("")
         botonQueHabriaPasado.style.display = "none"
     })
 }
@@ -181,8 +179,8 @@ if (botonNueva && botonNueva instanceof HTMLButtonElement) {
 if (botonQueHabriaPasado && botonQueHabriaPasado instanceof HTMLButtonElement) {
     botonQueHabriaPasado.addEventListener("click", () => {
         let cartaRand = obtenerNumeroAleatorio()
-        mensaje.innerText = `Si hubieras seguido, habría salido un ${cartaRand}`;
-        mensaje.style.display = "block"
+         mostrarMensaje(`Si hubieras seguido, habría salido un ${cartaRand}`);
     })
 }
-muestraPuntuacion();
+
+document.addEventListener("DOMContentLoaded", muestraPuntuacion)
