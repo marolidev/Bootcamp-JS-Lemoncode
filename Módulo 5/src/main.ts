@@ -3,7 +3,6 @@ import "./style.css";
 //Mostrar puntuación
 
 let puntuacion: number = 0;
-let mensaje = document.getElementById("mensaje") instanceof HTMLParagraphElement
 
 const muestraPuntuacion = () => {
     const elementoPuntuacion = document.getElementById("puntuacion")
@@ -114,7 +113,7 @@ const deshabilitarBotonPlantarse = (estaDeshabilitado: boolean) => {
 
 //Game over
 function gameOver() {
-    if (puntuacion > 7.5 && mensaje) {
+    if (puntuacion > 7.5) {
         mostrarMensaje('Game Over');
         deshabilitarBotonPedirCarta(true);
         deshabilitarBotonPlantarse(true);
@@ -126,60 +125,80 @@ function gameOver() {
     }
 }
 
+const pedirCarta = () => {
+    let numeroAleatorio: number = obtenerNumeroAleatorio();
+    const carta = obtenerNumeroCarta(numeroAleatorio);
+    const urlCarta = obtenerUrlCarta(carta);
+    mostrarCarta(urlCarta);
+
+    const puntosCarta = obtenerPuntosCarta(carta);
+    const puntosSumados = sumaPuntuacion(puntosCarta);
+    actualizarPuntuacion(puntosSumados);
+    muestraPuntuacion();
+    gameOver();
+}
+
 if (botonPedirCarta && botonPedirCarta instanceof HTMLButtonElement) {
     botonPedirCarta.addEventListener("click", () => {
-        let numeroAleatorio: number = obtenerNumeroAleatorio();
-        const carta = obtenerNumeroCarta(numeroAleatorio);
-        const urlCarta = obtenerUrlCarta(carta);
-        mostrarCarta(urlCarta);
-
-        const puntosCarta = obtenerPuntosCarta(carta);
-        const puntosSumados = sumaPuntuacion(puntosCarta);
-        actualizarPuntuacion(puntosSumados);
-        muestraPuntuacion();
-        gameOver();
+        pedirCarta();
     });
 } else {
     console.error("No se encontró el botón dameCarta")
 }
 
 
+const Plantarse = () => {   
+    if (puntuacion < 4) {
+    mostrarMensaje("Has sido muy conservador")}
+    if (puntuacion === 5 || puntuacion === 5.5) {
+    mostrarMensaje("Te ha entrado el canguelo eh?")}
+    if (puntuacion === 6 || puntuacion === 6.5 || puntuacion === 7) { mostrarMensaje("Casi casi...") }
+    if (puntuacion === 7.5) { mostrarMensaje("¡Lo has clavado!¡Enhorabuena!") 
+
+    }
+
+    deshabilitarBotonPedirCarta(true)
+    deshabilitarBotonPlantarse(true)
+    if (botonQueHabriaPasado && botonQueHabriaPasado instanceof HTMLButtonElement) {
+        botonQueHabriaPasado.style.display = "block";
+    }
+}
 
 if (botonPlantarse && botonQueHabriaPasado && botonPlantarse instanceof HTMLButtonElement && botonQueHabriaPasado instanceof HTMLButtonElement) {
     botonPlantarse.addEventListener("click", () => {
-        if (puntuacion < 4) {
-            mostrarMensaje("Has sido muy conservador")
-        }
-        if (puntuacion === 5 || puntuacion === 5.5) {
-            mostrarMensaje("Te ha entrado el canguelo eh?")
-        }
-        if (puntuacion === 6 || puntuacion === 6.5 || puntuacion === 7) { mostrarMensaje("Casi casi...") }
-        if (puntuacion === 7.5) { mostrarMensaje("¡Lo has clavado!¡Enhorabuena!") }
-
-        deshabilitarBotonPedirCarta(true)
-        deshabilitarBotonPlantarse(true)
-        botonQueHabriaPasado.style.display = "block";
+        Plantarse()
     })
 
 }
 // Nueva partida
 
+const Nueva = () => {
+    puntuacion = 0;
+    muestraPuntuacion();
+    deshabilitarBotonPedirCarta(false)
+    deshabilitarBotonPlantarse(false)
+    mostrarCarta("https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg")
+    mostrarMensaje("")
+    if(botonQueHabriaPasado && botonQueHabriaPasado instanceof HTMLButtonElement) {
+        botonQueHabriaPasado.style.display = "none";
+    }
+
+}
+
 if (botonNueva && botonQueHabriaPasado && botonNueva instanceof HTMLButtonElement && botonQueHabriaPasado instanceof HTMLButtonElement) {
     botonNueva.addEventListener("click", () => {
-        puntuacion = 0;
-        muestraPuntuacion();
-        deshabilitarBotonPedirCarta(false)
-        deshabilitarBotonPlantarse(false)
-        mostrarCarta("https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg")
-        mostrarMensaje("")
-        botonQueHabriaPasado.style.display = "none"
+        Nueva()
     })
+}
+
+const queHabriaPasado = () => {
+    let cartaRand = obtenerNumeroAleatorio()
+         mostrarMensaje(`Si hubieras seguido, habría salido un ${cartaRand}`);
 }
 
 if (botonQueHabriaPasado && botonQueHabriaPasado instanceof HTMLButtonElement) {
     botonQueHabriaPasado.addEventListener("click", () => {
-        let cartaRand = obtenerNumeroAleatorio()
-         mostrarMensaje(`Si hubieras seguido, habría salido un ${cartaRand}`);
+        queHabriaPasado()
     })
 }
 
