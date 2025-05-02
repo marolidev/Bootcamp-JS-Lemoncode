@@ -1,28 +1,96 @@
 //UI: interacción con html
-import { puntuacion } from "./modelo"
-import { pedirCarta, Plantarse, Nueva, queHabriaPasado } from "./motor"
+import { partida, actualizarPuntuacion } from "./modelo";
+import { obtenerNumeroAleatorio, obtenerNumeroCarta, obtenerPuntosCarta, sumaPuntuacion } from './motor';
+
+const pedirCarta = () => {
+    let numeroAleatorio: number = obtenerNumeroAleatorio();
+    const carta = obtenerNumeroCarta(numeroAleatorio);
+    const urlCarta = obtenerUrlCarta(carta);
+    mostrarCarta(urlCarta);
+
+    const puntosCarta = obtenerPuntosCarta(carta);
+    const puntosSumados = sumaPuntuacion(puntosCarta);
+    actualizarPuntuacion(puntosSumados);
+    muestraPuntuacion();
+    gameOver();
+}
+
+const Plantarse = () => {
+    if (partida.puntuacion < 4) {
+        mostrarMensaje("Has sido muy conservador")
+    }
+    if (partida.puntuacion === 5 || partida.puntuacion === 5.5) {
+        mostrarMensaje("Te ha entrado el canguelo eh?")
+    }
+    if (partida.puntuacion === 6 || partida.puntuacion === 6.5 || partida.puntuacion === 7) {
+        mostrarMensaje("Casi casi...")
+    }
+    if (partida.puntuacion === 7.5) {
+        mostrarMensaje("¡Lo has clavado!¡Enhorabuena!")
+    }
+
+    deshabilitarBotonPedirCarta(true)
+    deshabilitarBotonPlantarse(true)
+    if (botonQueHabriaPasado && botonQueHabriaPasado instanceof HTMLButtonElement) {
+        botonQueHabriaPasado.style.display = "block";
+    }
+}
+
+const Nueva = () => {
+    actualizarPuntuacion(0);
+    muestraPuntuacion();
+    deshabilitarBotonPedirCarta(false)
+    deshabilitarBotonPlantarse(false)
+    mostrarCarta("https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg")
+    mostrarMensaje("")
+    if (botonQueHabriaPasado && botonQueHabriaPasado instanceof HTMLButtonElement) {
+        botonQueHabriaPasado.style.display = "none";
+    }
+
+}
+
+const queHabriaPasado = () => {
+    let cartaRand = obtenerNumeroAleatorio()
+    mostrarMensaje(`Si hubieras seguido, habría salido un ${cartaRand}`);
+}
+
+//Game over
+function gameOver() {
+    console.log(partida.puntuacion)
+    if (partida.puntuacion > 7.5) {
+        mostrarMensaje('Game Over');
+        deshabilitarBotonPedirCarta(true);
+        deshabilitarBotonPlantarse(true);
+    }
+
+    else if (partida.puntuacion === 7.5) {
+        mostrarMensaje('Has ganado');
+        deshabilitarBotonPedirCarta(true);
+    }
+}
 
 export const muestraPuntuacion = () => {
     const elementoPuntuacion = document.getElementById("puntuacion")
-    if (elementoPuntuacion !== undefined && elementoPuntuacion !== null) 
-    {elementoPuntuacion.innerHTML = `${puntuacion}` } 
-    else { 
-        console.error("muestraPuntuacion: No se ha encontrado el elemento con id puntuacion") 
+    if (elementoPuntuacion !== undefined && elementoPuntuacion !== null) { elementoPuntuacion.innerHTML = `${partida.puntuacion}` }
+    else {
+        console.error("muestraPuntuacion: No se ha encontrado el elemento con id puntuacion")
     }
-    
+
     return elementoPuntuacion
 }
 
 //Mensaje mostrado
-export const mostrarMensaje = (mensaje: string) => {
+const mostrarMensaje = (mensaje: string) => {
     const elementoMensaje = document.getElementById("mensaje");
+
+    console.log(elementoMensaje)
 
     if (elementoMensaje && elementoMensaje instanceof HTMLParagraphElement) {
         elementoMensaje.textContent = mensaje;
     }
 }
 
-export const obtenerUrlCarta = (carta: number) => {
+const obtenerUrlCarta = (carta: number) => {
     switch (carta) {
         case 1:
             return "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/1_as-copas.jpg";
@@ -49,28 +117,28 @@ export const obtenerUrlCarta = (carta: number) => {
     }
 }
 
-export const mostrarCarta = (urlCarta: string): void => {
+const mostrarCarta = (urlCarta: string): void => {
     const cartaImagen = document.getElementById("cartaImagen");
 
     if (cartaImagen && cartaImagen instanceof HTMLImageElement) {
         cartaImagen.src = urlCarta;
     }
 };
-export const botonPedirCarta = document.getElementById("dameCarta");
+const botonPedirCarta = document.getElementById("dameCarta");
 
-export const botonNueva = document.getElementById("nueva");
+const botonNueva = document.getElementById("nueva");
 
-export const botonQueHabriaPasado = document.getElementById("alternativa");
+const botonQueHabriaPasado = document.getElementById("alternativa");
 
-export const botonPlantarse = document.getElementById("plantarse")
+const botonPlantarse = document.getElementById("plantarse")
 
-export const deshabilitarBotonPedirCarta = (estaDeshabilitado: boolean) => {
+const deshabilitarBotonPedirCarta = (estaDeshabilitado: boolean) => {
 
     if (botonPedirCarta && botonPedirCarta instanceof HTMLButtonElement) {
         botonPedirCarta.disabled = estaDeshabilitado;
     }
 }
-export const deshabilitarBotonPlantarse = (estaDeshabilitado: boolean) => {
+const deshabilitarBotonPlantarse = (estaDeshabilitado: boolean) => {
 
     if (botonPlantarse && botonPlantarse instanceof HTMLButtonElement) {
         botonPlantarse.disabled = estaDeshabilitado;
@@ -104,4 +172,3 @@ if (botonQueHabriaPasado && botonQueHabriaPasado instanceof HTMLButtonElement) {
         queHabriaPasado()
     })
 }
-

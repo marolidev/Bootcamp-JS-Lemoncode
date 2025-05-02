@@ -108,7 +108,7 @@ max-width: 200px;}
 #mensaje {
   margin-top: 1rem;
   font-size: 1.2rem;
-  color: #ffffff;
+  color: #cc23a7;
   min-height: 2rem; /* Para reservar espacio aunque no haya texto */
 }
 #alternativa {display: none}
