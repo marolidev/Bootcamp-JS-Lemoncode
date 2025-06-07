@@ -1,28 +1,25 @@
-import { Estado, MAXIMO_INTENTOS, partida } from "./modelo";
+//Reglas
+import { partida } from "./modelo";
 
-export const generarNumeroAleatorio = (): number =>
+export const obtenerPuntosCarta = (carta: number) => {
+    if (carta > 7) {
+        return 0.5;
+    }
+    return carta;
+}
+
+// Sumar puntuación
+export const sumaPuntuacion = (punto: number) => {
+    return partida.puntuacion + punto;
+}
+
+// export const obtenerNumeroAleatorio = (): number => Math.floor(Math.random() * 10 + 1)
+export const obtenerNumeroAleatorio = (): number =>
   Math.floor(Math.random() * 101);
 
-export const hasSuperadoElNumeroMaximoDeIntentos = (): boolean =>
-  partida.numeroDeIntentos >= MAXIMO_INTENTOS;
-
-export const comprobarNumero = (texto: string): Estado => {
-  const numero = parseInt(texto);
-  const esUnNumero = !isNaN(numero);
-
-  if (!esUnNumero) {
-    return "NO_ES_UN_NUMERO";
-  }
-
-  if (numero === partida.numeroParaAcertar) {
-    return "ES_EL_NUMERO_SECRETO";
-  }
-
-  if (hasSuperadoElNumeroMaximoDeIntentos()) {
-    return "GAME_OVER_MAXIMO_INTENTOS";
-  }
-
-  return numero > partida.numeroParaAcertar
-    ? "EL_NUMERO_ES_MAYOR"
-    : "EL_NUMERO_ES_MENOR";
-};
+export const obtenerNumeroCarta = (numero: number) => {
+    if (numero > 7) {
+        return numero + 2;
+    }
+    return numero;
+}

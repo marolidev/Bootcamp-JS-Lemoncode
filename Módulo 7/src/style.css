@@ -25,14 +25,13 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 2.2em;
   line-height: 1.1;
 }
 
@@ -73,8 +72,8 @@ button {
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
+  transition: border-color 0.25s;}
+
 button:hover {
   border-color: #646cff;
 }
@@ -95,3 +94,21 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+.botonera {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+#cartaImagen {align-items: center;
+margin: 20px auto;
+max-width: 200px;}
+#mensaje {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #cc23a7;
+  min-height: 2rem; /* Para reservar espacio aunque no haya texto */
+}
+#alternativa {display: none}
