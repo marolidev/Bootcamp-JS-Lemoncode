@@ -13,13 +13,22 @@ export const sumaPuntuacion = (punto: number) => {
     return partida.puntuacion + punto;
 }
 
-// export const obtenerNumeroAleatorio = (): number => Math.floor(Math.random() * 10 + 1)
-export const obtenerNumeroAleatorio = (): number =>
-  Math.floor(Math.random() * 101);
+export const obtenerNumeroAleatorio = (): number => Math.floor(Math.random() * 10 + 1)
+
 
 export const obtenerNumeroCarta = (numero: number) => {
     if (numero > 7) {
         return numero + 2;
     }
     return numero;
+}
+
+export const gestionarEstadoPartida = () => {
+    if (partida.puntuacion === 7.5) {
+        partida.estadoPartida = 'Ganar';
+    } else if (partida.puntuacion > 7.5) {
+        partida.estadoPartida = 'Perder';
+    }
+
+    return partida.estadoPartida;
 }
