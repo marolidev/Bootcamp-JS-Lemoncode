@@ -76,22 +76,29 @@ const pacientes: Pacientes[] = [
 
 // a) Pacientes asignados a pediatría
 
-const obtenPacientesAsignadosAPediatria = (pacientes: Pacientes[]): Pacientes[] => {
-   const div = document.getElementById("lista-pacientes");
+const crearParrafo = (mensaje: string) => {
+  const p = document.createElement("p");
+  p.textContent = mensaje;
 
-  if (div instanceof HTMLDivElement){
-   
-   for (let i: number = 0; i < pacientes.length; i++) {
-   if(pacientes[i].especialidad == "Pediatra"){
-      const p = document.createElement("p")
-      p.textContent = `ID- ${pacientes[i].id} - ${pacientes[i].nombre} ${pacientes[i].apellidos}`
-      div.appendChild(p)
-         }
+  return p;
+}
+
+const obtenPacientesAsignadosAPediatria = (pacientes: Pacientes[]): Pacientes[] => {
+  const div = document.getElementById("lista-pacientes");
+
+  if (div instanceof HTMLDivElement) {
+
+    for (let i: number = 0; i < pacientes.length; i++) {
+      if (pacientes[i].especialidad == "Pediatra") {
+        const parrafoCreado = crearParrafo(`ID- ${pacientes[i].id} - ${pacientes[i].nombre} ${pacientes[i].apellidos}`)
+        div.appendChild(parrafoCreado)
       }
+    }
   }
- 
+
   return pacientes
 };
+
 obtenPacientesAsignadosAPediatria(pacientes)
 
 //b) Pacientes asignados a pediatría y con edad inferior a 10 años
@@ -99,74 +106,82 @@ obtenPacientesAsignadosAPediatria(pacientes)
 const obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios = (pacientes: Pacientes[]): Pacientes[] => {
   const div = document.getElementById("lista-edad");
 
-  if (div instanceof HTMLDivElement){
+  if (div instanceof HTMLDivElement) {
 
-    for (let i: number = 0; i <pacientes.length; i++) {
-    if (pacientes[i].especialidad == "Pediatra" && pacientes[i].edad < 10){
-        const p = document.createElement("p")
-        p.textContent = `ID ${pacientes[i].id} - ${pacientes[i].nombre} ${pacientes[i].apellidos}`
-       div.appendChild(p)
+    for (let i: number = 0; i < pacientes.length; i++) {
+      if (pacientes[i].especialidad == "Pediatra" && pacientes[i].edad < 10) {
+        // const p = document.createElement("p")
+        // p.textContent = `ID ${pacientes[i].id} - ${pacientes[i].nombre} ${pacientes[i].apellidos}`
+
+        const parrafoCreado = crearParrafo(`ID ${pacientes[i].id} - ${pacientes[i].nombre} ${pacientes[i].apellidos}`)
+        div.appendChild(parrafoCreado)
       }
 
+    }
   }
-}
-   return pacientes
+  return pacientes
 };
+
 obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios(pacientes)
 
 //Ritmo cardiaco > 100 y temperatura > 39
 const activarProtocoloUrgencia = (pacientes: Pacientes[]): boolean => {
   const div = document.getElementById("urgencias")
   let activarProtocolo = false;
-  if (div instanceof HTMLDivElement){
+  if (div instanceof HTMLDivElement) {
 
-  for(let i: number = 0; i < pacientes.length; i++){
-      if(pacientes[i].frecuenciaCardiaca > 100 && pacientes[i].temperatura > 39){ 
-      activarProtocolo = true;}
-      else {activarProtocolo = false}
+    for (let i: number = 0; i < pacientes.length; i++) {
+      if (pacientes[i].frecuenciaCardiaca > 100 && pacientes[i].temperatura > 39) {
+        activarProtocolo = true;
+      }
+      else { activarProtocolo = false }
 
-      const protocolo = document.createElement('p')
-      protocolo.textContent = `ID ${pacientes[i].id} - ${activarProtocolo}`
-      div.appendChild(protocolo)
+      // const protocolo = document.createElement('p')
+      // protocolo.textContent = `ID ${pacientes[i].id} - ${activarProtocolo}`
+      const parrafoCreado = crearParrafo(`ID ${pacientes[i].id} - ${activarProtocolo}`);
+      div.appendChild(parrafoCreado)
+    }
+
   }
-
-}
   return activarProtocolo;
 };
+
 activarProtocoloUrgencia(pacientes)
 
 //Reasignar pediatría
 
 const reasignaPacientesAMedicoFamilia = (
   pacientes: Pacientes[]): Pacientes[] => {
-    const div = document.getElementById("medico-familia")
-    if (div instanceof HTMLDivElement) {
-    for(let i:number = 0; i< pacientes.length; i++){
-    if(pacientes[i].especialidad === "Pediatra"){
-      pacientes[i].especialidad = "Medico de familia"
+  const div = document.getElementById("medico-familia")
+  if (div instanceof HTMLDivElement) {
+    for (let i: number = 0; i < pacientes.length; i++) {
+      if (pacientes[i].especialidad === "Pediatra") {
+        pacientes[i].especialidad = "Medico de familia"
+      }
+      const parrafoCreado = crearParrafo(`ID ${pacientes[i].id} - ${pacientes[i].nombre} ${pacientes[i].apellidos}`);
+      div.appendChild(parrafoCreado)
     }
-    const medico = document.createElement("p")
-    medico.textContent = `${pacientes[i].id} - ${pacientes[i].nombre} ${pacientes[i].apellidos}`
-    div.appendChild(medico)
   }
-    }
 
   return pacientes
 };
+
 reasignaPacientesAMedicoFamilia(pacientes)
 
 //Mandar pediatra a casa
 const HayPacientesDePediatria = (pacientes: Pacientes[]): boolean => {
   const div = document.getElementById("pediatra")
   let pacientesPediatria = false;
-  if (div instanceof HTMLDivElement){
+  if (div instanceof HTMLDivElement) {
     const pediatra = document.createElement("p")
-    for(let i: number = 0; i< pacientes.length; i++){
-      if(pacientes[i].especialidad == "Pediatra"){
+    
+    for (let i: number = 0; i < pacientes.length; i++) {
+      if (pacientes[i].especialidad == "Pediatra") {
         pacientesPediatria = true
         pediatra.textContent = `${pacientes[i].id} - ${pacientes[i].nombre} ${pacientes[i].apellidos}`
         div.appendChild(pediatra)
-      }else{pediatra.textContent = "No hay pacientes en pediatría"
+      } else {
+        pediatra.textContent = "No hay pacientes en pediatría"
         div.appendChild(pediatra)
       }
     }
@@ -174,6 +189,7 @@ const HayPacientesDePediatria = (pacientes: Pacientes[]): boolean => {
   }
   return pacientesPediatria
 };
+
 HayPacientesDePediatria(pacientes)
 
 //Opcional
@@ -191,20 +207,23 @@ const cuentaPacientesPorEspecialidad = (pacientes: Pacientes[]): NumeroPacientes
   }
   const div = document.getElementById("especialidad")
 
-  if(div instanceof HTMLDivElement){
-    const p = document.createElement("p")
-    for(let i: number = 0; i < pacientes.length; i++){
-    if(pacientes[i].especialidad == "Medico de familia"){
-      resultado.medicoDeFamilia++;}
-    else if(pacientes[i].especialidad == "Pediatra"){
-      resultado.pediatria++; }
-    else if(pacientes[i].especialidad == "Cardiólogo"){
-      resultado.cardiologia++}
-    } 
-    p.textContent = `Médico de Familia: ${resultado.medicoDeFamilia}, Pediatría: ${resultado.pediatria}, Cardiología: ${resultado.cardiologia}`
-    div.appendChild(p)
+  if (div instanceof HTMLDivElement) {
+    for (let i: number = 0; i < pacientes.length; i++) {
+      if (pacientes[i].especialidad == "Medico de familia") {
+        resultado.medicoDeFamilia++;
+      }
+      else if (pacientes[i].especialidad == "Pediatra") {
+        resultado.pediatria++;
+      }
+      else if (pacientes[i].especialidad == "Cardiólogo") {
+        resultado.cardiologia++
+      }
+    }
+    const parrafoCreado = crearParrafo(`Médico de Familia: ${resultado.medicoDeFamilia}, Pediatría: ${resultado.pediatria}, Cardiología: ${resultado.cardiologia}`)
+    //p.textContent = `Médico de Familia: ${resultado.medicoDeFamilia}, Pediatría: ${resultado.pediatria}, Cardiología: ${resultado.cardiologia}`
+    div.appendChild(parrafoCreado)
   }
-  
+
   return resultado
 };
 
