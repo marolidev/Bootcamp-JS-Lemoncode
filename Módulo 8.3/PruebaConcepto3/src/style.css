@@ -1,0 +1,31 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-top: 50px;
+  background-color: #f4f4f4;
+}
+.container{
+  display: grid;
+  grid-template-columns: repeat(4, 100px); /* 4 columnas */
+  grid-template-rows: repeat(3, 100px);   /* 3 filas */
+  gap: 20px; /* espacio entre cartas */
+  justify-content: center;
+
+}
+.carta {
+  background-color: #90D5FF;
+  border-radius: 8px;
+}
+.box{
+    color: cornflowerblue;
+    height: 150px;
+    width: 150px;
+    display: flex;
+    border-radius: 25px;
+
+}
+.Abeja {
+    height: 150px;
+    width: 150px;
+
+}
