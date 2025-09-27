@@ -6,26 +6,21 @@ body {
 }
 .container{
   display: grid;
-  grid-template-columns: repeat(4, 100px); /* 4 columnas */
-  grid-template-rows: repeat(3, 100px);   /* 3 filas */
-  gap: 20px; /* espacio entre cartas */
-  justify-content: center;
+  grid-template-columns: repeat(2, 100px); 
+  grid-template-rows: repeat(1, 100px);  
+  gap: 100px; 
+  justify-content: center; }
 
-}
-.carta {
-  background-color: #90D5FF;
-  border-radius: 8px;
-}
 .box{
-    color: cornflowerblue;
+    background-color: #90D5FF;
     height: 150px;
     width: 150px;
-    display: flex;
+    text-align: center;
     border-radius: 25px;
-
+  
 }
-.Abeja {
-    height: 150px;
-    width: 150px;
 
+.Abeja{
+  height: 50px;
+  width: 50px;
 }

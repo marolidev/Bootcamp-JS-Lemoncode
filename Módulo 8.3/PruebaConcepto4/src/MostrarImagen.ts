@@ -1,23 +1,45 @@
 
-const imagenCarta = document.getElementById("Abeja")
+const imagenAbeja = document.getElementById("Abeja")
 const carta = document.getElementById("box")
 
-const reverso: string = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/refs/heads/main/memo/6.png"
-let volteada: boolean = false;
+const imagenBuho = document.getElementById("Buho")
+const cartaBuho = document.getElementById("box2")
 
-if (carta instanceof HTMLDivElement && imagenCarta instanceof HTMLImageElement){
+if (imagenAbeja) imagenAbeja.style.display = "none";
+if (imagenBuho) imagenBuho.style.display = "none";
+
+let volteadaAbeja: boolean = false; //false = fondo azul, true = imagen
+let volteadaBuho: boolean = false;
+
+if (carta instanceof HTMLDivElement && imagenAbeja instanceof HTMLImageElement){
     carta.addEventListener("click", () => {
-        if (volteada){
-            imagenCarta.style.display = "block"
-            carta.style.backgroundColor = "transparent"
+        if (volteadaAbeja){
+             carta.style.backgroundColor = "#90D5FF"
+             imagenAbeja.style.display = "none";  
         } 
         else{
-            imagenCarta.style.display = "none";
-            carta.style.backgroundColor = "#90D5FF"
+           imagenAbeja.style.display = "block"
+           carta.style.background = "lavender"
         }
-        volteada = !volteada
+        volteadaAbeja = !volteadaAbeja
 
 })
 
 }
 
+if(cartaBuho instanceof HTMLDivElement && imagenBuho instanceof HTMLImageElement){
+
+    cartaBuho.addEventListener("click", () => {
+        if (volteadaBuho){
+            cartaBuho.style.backgroundColor = "#90D5FF"
+           imagenBuho.style.display = "none";
+        } 
+        else{
+            
+             imagenBuho.style.display = "block"
+            cartaBuho.style.background = "lavender"
+        }
+        volteadaBuho = !volteadaBuho
+
+})
+}
