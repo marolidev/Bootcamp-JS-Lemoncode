@@ -1,0 +1,29 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.carta {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: transform 0.2s;
+  background-color: cornflowerblue; /* Fondo azul por defecto */
+  object-fit: cover; /* Ajusta bien la imagen al voltearse */
+}
+
+.carta:hover {
+  transform: scale(1.05);
+}
+#btn-reiniciar {
+  display: None;
+}
