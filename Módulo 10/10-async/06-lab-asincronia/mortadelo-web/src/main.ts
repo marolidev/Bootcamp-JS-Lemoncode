@@ -2,6 +2,7 @@
 import { obtenerPersonajes } from "./api";
 import { pintarPersonajes } from "./ui";
 import { esFormulario, esInput, esValido } from "./utils";
+import "./estilos.css";
 
 const form = document.getElementById("formBusqueda");
 const input = document.getElementById("txtNombre");
